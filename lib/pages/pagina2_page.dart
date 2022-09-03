@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:getx/pages/models/usuario.dart';
+
+import 'controllers/usuario_controller.dart';
+
+
+class Pagina2Page extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+
+    print( Get.arguments['edad'] );
+
+    final usuarioCtrl = Get.find<UsuarioController>();
+
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Pagina 2'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+            MaterialButton(
+              child: Text('Establecer Usuario', style: TextStyle( color: Colors.white ) ),
+              color: Colors.blue,
+              onPressed: () {
+                usuarioCtrl.cargarUsuario( Usuario(nombre: 'Pepito', edad: 3 ) );
+                Get.snackbar(
+                  'Usuario establecido', 
+                  'Pepito es el nombre del usuario',
+                  backgroundColor: Colors.white,
+                  boxShadows: [
+                    BoxShadow(
+                      color: Colors.black38,
+                      blurRadius: 10
+                    )
+                  ]
+                );
+              }
+            ),
+
+            MaterialButton(
+              child: Text('Cambiar Edad', style: TextStyle( color: Colors.white ) ),
+              color: Colors.blue,
+              onPressed: () {
+                usuarioCtrl.cambiarEdad(8);
+              }
+            ),
+
+            MaterialButton(
+              child: Text('Añadir Profesion', style: TextStyle( color: Colors.white ) ),
+              color: Colors.blue,
+              onPressed: () {
+                // usuarioCtrl.agregarProfesion( 'Profesión #${ usuarioCtrl.usuario.value.profesiones.length + 1 }' );
+                usuarioCtrl.agregarProfesion( 'Ventas' );
+              }
+            ),
+
+            MaterialButton(
+              child: Text('Cambair tema', style: TextStyle( color: Colors.white ) ),
+              color: Colors.blue,
+              onPressed: () {
+                Get.changeTheme( Get.isDarkMode ? ThemeData.light() : ThemeData.dark() );
+              }
+            ),
+
+          ],
+        )
+     ),
+   );
+  }
+}
